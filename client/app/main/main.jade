@@ -1,0 +1,27 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+header
+
+.container
+  form.locatable-form
+    label Add locatable
+    p.input-group
+      input.form-control(type='text', placeholder='Add a new locatable here.', ng-model='newLocatable')
+      span.input-group-btn
+        button.btn.btn-primary(type='submit', ng-click='addLocatable()') Add New
+  
+  ui-gmap-google-map(center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds")
+    ui-gmap-markers(models="locatableMarkers" coords="'self'" icon="'icon'" options="'options'" doCluster="true" clusterOptions="map.clusterOptions" click="onClicked")
+        ui-gmap-windows(show="'showWindow'" closeClick="'closeClick'" ng-cloak)
+            div(style="height:100px;")
+                p(ng-non-bindable) {{locatable._id}} at {{ latitude | number:4 }}, {{ longitude | number:4 }} <br/></br>{{getLocatableString(locatable)}}!
+
+
+footer.footer
+  .container
+    p
+      | Locator version 1.0.0
+      = ' | '
+      a(href='https://www.compass-point.net') Compass Point, Inc.
+      = ' | '
+      a(href='https://github.com/DaftMonk/generator-angular-fullstack') Generator
